@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ExpressionCalculator {
+
     private ArrayList<AbstractMathExpression> listExpression;
     public ExpressionCalculator(String expression) {
         listExpression = new ArrayList<>();

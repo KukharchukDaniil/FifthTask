@@ -4,9 +4,11 @@ import java.util.Objects;
 
 public class Leaf implements Component{
     private String value;
+    LeafType leafType;
 
-    public Leaf(String value) {
+    public Leaf(String value, LeafType leafType) {
         this.value = value;
+        this.leafType = leafType;
     }
 
     public String getValue() {
@@ -26,11 +28,12 @@ public class Leaf implements Component{
             return false;
         }
         Leaf leaf = (Leaf) o;
-        return Objects.equals(value, leaf.value);
+        return Objects.equals(value, leaf.value) &&
+                leafType == leaf.leafType;
     }
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
+        return Objects.hash(value, leafType);
     }
 }

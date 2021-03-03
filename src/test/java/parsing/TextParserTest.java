@@ -2,6 +2,7 @@ package parsing;
 
 import entities.Composite;
 import entities.Leaf;
+import entities.LeafType;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,9 +16,9 @@ import static org.mockito.Mockito.when;
 
 public class TextParserTest {
     public static final String PARSING_TEST = "aaaa.\ndddd\tbbbb";
-    public static final Leaf FIRST_WORD = new Leaf("aaaa");
-    public static final Leaf SECOND_WORD = new Leaf("dddd");
-    public static final Leaf THIRD_WORD = new Leaf("bbb");
+    public static final Leaf FIRST_WORD = new Leaf("aaaa", LeafType.WORD);
+    public static final Leaf SECOND_WORD = new Leaf("dddd", LeafType.WORD);
+    public static final Leaf THIRD_WORD = new Leaf("bbb", LeafType.WORD);
     public static final Composite FIRST_SENTENCE = new Composite(Collections.singletonList(FIRST_WORD));
     public static final Composite SECOND_SENTENCE = new Composite(Collections.singletonList(SECOND_WORD));
     public static final Composite THIRD_SENTENCE = new Composite(Collections.singletonList(THIRD_WORD));
@@ -31,7 +32,7 @@ public class TextParserTest {
         paragraphParser = Mockito.mock(ParagraphParser.class);
     }
     @Test
-    public void parse() {
+    public void testParse() {
         //given
         TextParser textParser = new TextParser( new ParagraphParser(new SentenceParser(null)));
         Composite expected = new Composite(Arrays.asList(FIRST_PARAGRAPH,SECOND_PARAGRAPH));

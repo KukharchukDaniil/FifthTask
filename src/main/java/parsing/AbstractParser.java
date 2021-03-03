@@ -30,8 +30,6 @@ public abstract class AbstractParser implements Parser {
         List<Component> components = null;
         if(successor!=null) {
             components = parsedComponents.stream().map(successor::parse).collect(Collectors.toList());
-        }else if(this.getClass() == SentenceParser.class){
-            components = parsedComponents.stream().map(Leaf::new).collect(Collectors.toList());
         }
         return new Composite(components);
     }
