@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class SentenceParser extends AbstractParser{
-    private static final String DELIMITER = "[\\s|,]";
+    private static final String DELIMITER = "([\\s,?\\n])+";
     public SentenceParser(Parser successor) {
         super(successor);
     }
@@ -19,9 +19,8 @@ public class SentenceParser extends AbstractParser{
     }
 
     @Override
-    public Component parse(String input) {
-        List<String> words = Arrays.asList(input.split(DELIMITER));
-        List<Component> components = words.stream().map(Leaf::new).collect(Collectors.toList());
-        return new Composite(components);
+    protected String getDelimiter() {
+        return DELIMITER;
     }
+
 }

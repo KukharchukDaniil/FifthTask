@@ -14,10 +14,8 @@ public class ParagraphParser extends AbstractParser {
         super(successor);
     }
 
-    public Component parse(String input) {
-        List<String> sentences = Arrays.asList(input.split(DELIMITER));
-        Parser successor = getSuccessor();
-        List<Component> components = sentences.stream().map(successor::parse).collect(Collectors.toList());
-        return new Composite(components);
+    @Override
+    protected String getDelimiter() {
+        return DELIMITER;
     }
 }
