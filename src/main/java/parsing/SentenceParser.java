@@ -4,6 +4,7 @@ import entities.Component;
 import entities.Composite;
 import entities.Leaf;
 import entities.LeafType;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class SentenceParser extends AbstractParser{
+    private static final Logger LOGGER = Logger.getLogger(SentenceParser.class);
     private static final String DELIMITER = "(\\w+)|(\\[(([\\d]+[\\s]+)+([\\*\\-\\+\\/])+)\\])";
     public SentenceParser(Parser successor) {
         super(successor);
@@ -41,6 +43,7 @@ public class SentenceParser extends AbstractParser{
                 components.add(new Leaf(string, LeafType.WORD));
             }else{
                 components.add(new Leaf(string, LeafType.EXPRESSION));
+                LOGGER.info("Expression has been detected: " + string);
             }
         });
         return new Composite(components);
